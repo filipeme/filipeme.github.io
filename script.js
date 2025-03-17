@@ -28,7 +28,7 @@ function checkScrollPosition() {
         if (logoText) logoText.style.color = '#ff914d'; // Cor primária
         
         // Trocar a imagem do logo
-        if (logoImage) logoImage.src = '/portfolio/logoF_.png'; // Novo logo
+        if (logoImage) logoImage.src = '/logoF_.png'; // Novo logo
     } else {
         navBar.classList.remove('roll');
         
@@ -41,7 +41,7 @@ function checkScrollPosition() {
         if (logoText) logoText.style.color = '#fff'; // Cor inicial (branco)
         
         // Voltar para a imagem original do logo
-        if (logoImage) logoImage.src = '/portfolio/logoF.png'; // Logo original
+        if (logoImage) logoImage.src = '/logoF.png'; // Logo original
     }
 }
 
@@ -249,7 +249,7 @@ document.addEventListener("scroll", () => {
         logoText.style.color = '#fff'; // Cor inicial (branco)
 
         // Voltar para a imagem original do logo
-        logoImage.src = '/portfolio/logoF.png'; // Logo original
+        logoImage.src = '/logoF.png'; // Logo original
     }
 });
 
