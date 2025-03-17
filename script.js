@@ -8,6 +8,54 @@ const dots = document.querySelectorAll('.dot');
 const slides = document.querySelectorAll('.testimonial-slide');
 const contactForm = document.getElementById('contactForm');
 
+
+// Adicione esta função no início do seu script.js
+function checkScrollPosition() {
+    let scrollTop = window.scrollY;
+    let navBar = document.querySelector('#header');
+    let logoImage = document.querySelector('.logo img');
+    let logoText = document.querySelector('#outline-text');
+    
+    if (scrollTop > 0) {
+        navBar.classList.add('roll');
+        
+        // Mudar a cor dos links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.style.color = '#ff914d'; // Cor primária
+        });
+        
+        // Mudar a cor do texto do logo
+        if (logoText) logoText.style.color = '#ff914d'; // Cor primária
+        
+        // Trocar a imagem do logo
+        if (logoImage) logoImage.src = '/portfolio/logoF_.png'; // Novo logo
+    } else {
+        navBar.classList.remove('roll');
+        
+        // Reverter a cor dos links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.style.color = '#fff'; // Cor inicial (branco)
+        });
+        
+        // Reverter a cor do texto do logo
+        if (logoText) logoText.style.color = '#fff'; // Cor inicial (branco)
+        
+        // Voltar para a imagem original do logo
+        if (logoImage) logoImage.src = '/portfolio/logoF.png'; // Logo original
+    }
+}
+
+// Execute a função imediatamente quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    checkScrollPosition();
+    
+    // Também execute a função no evento de scroll
+    window.addEventListener('scroll', checkScrollPosition);
+    
+    // Resto do seu código...
+});
+
+
 // Mobile Navigation
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
@@ -228,7 +276,7 @@ function addActiveClass(currentSection) {
     });
 }
 
-// Função para monitorar o scroll e identificar a seção visível
+// Remova ou modifique esta parte do listener de scroll
 window.addEventListener('scroll', function() {
     const scrollPosition = window.scrollY;
     
@@ -236,7 +284,7 @@ window.addEventListener('scroll', function() {
     
     // Verifica cada seção para ver se está visível
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;  // Ajuste para quando a seção começar a aparecer
+        const sectionTop = section.offsetTop - 100;
         const sectionHeight = section.offsetHeight;
         
         // Verifica se o scroll está dentro dos limites da seção atual
@@ -245,33 +293,20 @@ window.addEventListener('scroll', function() {
         }
     });
     
-    if (currentActiveSection !== '') {
+    if (currentActiveSection !== '' && scrollPosition > 100) {
         removeActiveClass();  // Remove a classe de todos os links
         addActiveClass(currentActiveSection);  // Adiciona a classe ao link da seção visível
-    } else if (scrollPosition < 100) {
-        // Se estiver próximo ao topo, ative o link "home"
+    } else {
+        // Se estiver no topo ou não houver seção ativa, remova todas as classes ativas
         removeActiveClass();
-        addActiveClass('home');
     }
 });
 
-// Inicializa o estado ativo para a seção atual quando a página carrega
+// Modifique o evento DOMContentLoaded para não ativar nenhum link automaticamente
 document.addEventListener('DOMContentLoaded', function() {
-    const scrollPosition = window.scrollY;
+    // Não ative nenhum link por padrão
+    removeActiveClass();
     
-    if (scrollPosition < 100) {
-        removeActiveClass();
-        addActiveClass('home');
-    } else {
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionHeight = section.offsetHeight;
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                const currentSection = section.getAttribute('id');
-                removeActiveClass();
-                addActiveClass(currentSection);
-            }
-        });
-    }
+    // Apenas configure o evento de scroll
+    window.dispatchEvent(new Event('scroll'));
 });
