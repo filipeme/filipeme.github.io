@@ -219,18 +219,18 @@ section {
 }
 
 .hero-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-bottom: 15px;
     color: #fff;
     font-weight: 500;
-    line-height: 26px;
+    line-height: 28px;
 }
 
 .hero-content p {
     font-size: 1.1rem;
     margin-bottom: 30px;
     color: #aaa;
-    line-height: 25px;
+    line-height: 20px;
 }
 
 .highlight {
